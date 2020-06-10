@@ -1,10 +1,11 @@
 var socket =io('ws://192.168.123.94:3000');
 var color = '';
-var GRID_SIZE = 40;
+var GRID_SIZE = 30;
 var HORIZONTAL_SIZE = null;
 var VERTICAL_SIZE = null;
 var checkerBoard = [];
 var turn = '';
+var roomId = '';
 
 var cvs = document.getElementById('cvs');
 var ctx = cvs.getContext('2d');
@@ -12,7 +13,10 @@ var ctx = cvs.getContext('2d');
 socket.on('conn', function(data){
    console.log(data);
    color = data.color;
-   document.querySelector('#color').innerHTML = 'You are ' + color;
+   document.querySelector('#color').innerHTML = 'You are ' + color + ', in Room ' + roomId;
+   if(color=='visitor'){
+      document.getElementById('restart').disabled = true;
+   }
 
    HORIZONTAL_SIZE = data.hs;
    VERTICAL_SIZE = data.vs;
@@ -20,13 +24,14 @@ socket.on('conn', function(data){
    cvs.width = HORIZONTAL_SIZE * GRID_SIZE;
    cvs.height = VERTICAL_SIZE * GRID_SIZE;
 
-   if(data.num == 2){
-      init();
-   }
+   // if(data.num == 2){
+   //    init();
+   // }
 });
 
 socket.on('getCheckerBoard', function(data){
-   console.log(data);
+   console.log('receive checkerboard from server ' );
+   console.log( data);
    checkerBoard = data.checkerBoard;
    turn = data.turn;
    drawCheckerBoard();
@@ -45,7 +50,7 @@ socket.on('getCheckerBoard', function(data){
 
 function init(){
 //   drawCheckerBoard();
-   if(color =='null'){
+   if(color =='visitor'){
       return;
    }
    console.log('2 players,init');
@@ -60,18 +65,17 @@ function putChess(e){
    console.log('draw a chess');
    var x = parseInt((e.pageX - cvs.offsetLeft) / GRID_SIZE);
    var y = parseInt((e.pageY - cvs.offsetTop) / GRID_SIZE);
-
+   // only when game start can putchess, otherwise return
    if(checkerBoard[x][y].state){
       return;
    }
-  // drawChess(x, y);
-   socket.emit('putchess', x,y);
+   socket.emit('putchess', roomId, x,y);
    console.log(x, y);
  //  document.getElementById('tips').innerText = 'Now ' +( turn ==false? 'Black' : 'White') +' Turn!'
 }
 
 /**
- * darw chess
+ * draw chess
  */
 function drawChess(x, y){
    ctx.beginPath();
@@ -109,18 +113,58 @@ socket.on('gameover',function(data){
 
 document.getElementById('restart').onclick = function(){
    if(color !='null'){
-      socket.emit('restart',color);
+      socket.emit('restart',roomId);
    }
 }
 
-socket.on('restartRequest',function(passcolor){
-   if(color !='null'){
-      console.log('receive ' +passcolor +' restart request');
+document.getElementById('join').onclick = function(){
+   roomId=document.getElementById("roomId").value;
+   console.log(roomId);
+   socket.emit('joinRoom',roomId);
+   document.getElementById("join").disabled=true;
+   document.getElementById("leave").disabled=false;
+}
+
+document.getElementById('leave').onclick = function(){
+   // console.log(roomId);
+   if (confirm("Want to leave this game?")) {
+
+      document.getElementById("join").disabled=false;
+      document.getElementById("leave").disabled=true;
+
+      socket.emit('leaveRoom',roomId,color);
+      document.querySelector('#info').innerHTML = ('Enter room id to Join a game!');
+      document.querySelector('#color').innerHTML = ('You are a visitor.');
+//      location.reload();
+   } 
+}
+
+
+socket.on('restartRequest',function(){
+   if(color !='visitor'){
+      // console.log('receive ' +passcolor +' restart request');
       if (confirm("Want to restart?")) {
-         socket.emit('restartConfirm',color);
+         socket.emit('restartConfirm',roomId, color);
+
       } else {
-         socket.emit('restartConfirm',color + 'doesn\'t');
+         socket.emit('restartConfirm',RoomId, (color + 'doesn\'t'));
       }
+   }
+});
+
+socket.on('leaveInfo',function(color){
+   console.log(color + ' left the game');
+   document.querySelector('#info').innerHTML = ('Wait for another gamer.');
+ //  socket.emit('stopInterv');
+   alert(color + ' left the game');
+   cvs.onclick = null;
+//   socket.emit('joinRoom',roomId);
+});
+
+socket.on('stocHeartBeat',function(nowtime){
+   if(color !='visitor'){
+      console.log(color + ' receive heartbeat at' + nowtime);
+      socket.emit('ctosHeartBeat', nowtime);
    }
 });
 
