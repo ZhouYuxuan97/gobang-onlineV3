@@ -19,6 +19,8 @@ Expect to add:
 2. Count online people 
 3. Use username to log-in, store the game 
 4. Return the game after refreshing or offline suddenly
+5. Set checkerboard size
+6. Beautify the interface
 
 
 Final goal:
