@@ -28,15 +28,15 @@ Java Spring demo[Gobang-Online-Java-Spring](https://github.com/ZhouYuxuan97/Goba
 Move the server to Java SpringBoot, use nginx and redis
 
 ## Sample Pages:
-### Wait for another player
-![Wait for another player](https://github.com/ZhouYuxuan97/ProjectImage/blob/master/Gobang-OnlineV3/wait.png)<br><br>
+### player in lobby
+![](https://github.com/ZhouYuxuan97/ProjectImage/blob/master/Gobang-OnlineV3/lobby.png)<br><br>
 
 ### Playing and watching game
 ![Playing and watching game](https://github.com/ZhouYuxuan97/ProjectImage/blob/master/Gobang-OnlineV3/in-game.png)<br><br>
 
 ### Restart game
-![Restart game](https://github.com/ZhouYuxuan97/ProjectImage/blob/master/Gobang-Online3/restart.png)<br><br>
+![Restart game](https://github.com/ZhouYuxuan97/ProjectImage/blob/master/Gobang-OnlineV3/restart.png)<br><br>
 
 ### Someone win
-![Someone win](https://github.com/ZhouYuxuan97/ProjectImage/blob/master/Gobang-Online3/win.png)<br><br>
+![Someone win](https://github.com/ZhouYuxuan97/ProjectImage/blob/master/Gobang-OnlineV3/win.png)<br><br>
 
