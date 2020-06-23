@@ -1,6 +1,6 @@
 var socket =io('ws://192.168.123.94:3000');
 var color = '';
-var GRID_SIZE = 30;
+var GRID_SIZE = 20;
 var HORIZONTAL_SIZE = null;
 var VERTICAL_SIZE = null;
 var checkerBoard = [];
@@ -121,6 +121,7 @@ document.getElementById('join').onclick = function(){
    roomId=document.getElementById("roomId").value;
    console.log(roomId);
    socket.emit('joinRoom',roomId);
+   document.getElementById("restart").disabled=false;
    document.getElementById("join").disabled=true;
    document.getElementById("leave").disabled=false;
 }
@@ -128,9 +129,10 @@ document.getElementById('join').onclick = function(){
 document.getElementById('leave').onclick = function(){
    // console.log(roomId);
    if (confirm("Want to leave this game?")) {
-
+      document.getElementById("restart").disabled=true;
       document.getElementById("join").disabled=false;
       document.getElementById("leave").disabled=true;
+      cvs.onclick = null;
 
       socket.emit('leaveRoom',roomId,color);
       document.querySelector('#info').innerHTML = ('Enter room id to Join a game!');
