@@ -40,3 +40,6 @@ Move the server to Java SpringBoot, use nginx and redis
 ### Someone win
 ![Someone win](https://github.com/ZhouYuxuan97/ProjectImage/blob/master/Gobang-OnlineV3/win.png)<br><br>
 
+### Someone leave room
+![Someone leave room](https://github.com/ZhouYuxuan97/ProjectImage/blob/master/Gobang-OnlineV3/leaveroom.png)<br><br>
+
