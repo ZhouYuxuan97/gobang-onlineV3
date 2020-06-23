@@ -1,6 +1,7 @@
 # Gobang-OnlineV3
 Simple Online Gobang Game, learning basic knowledge of node.js and websocket, using package of websocket.io.<br>
-Previous demo [Gobang-OnlineV2](https://github.com/ZhouYuxuan97/gobang-onlineV2)
+Previous demo [Gobang-OnlineV2](https://github.com/ZhouYuxuan97/gobang-onlineV2)<br>
+Java Spring demo[Gobang-Online-Java-Spring](https://github.com/ZhouYuxuan97/Gobang-Online-Java-Spring)
 
 ## Compare to V2 add:
 1. Room function
@@ -15,7 +16,7 @@ Previous demo [Gobang-OnlineV2](https://github.com/ZhouYuxuan97/gobang-onlineV2)
 4. View in-playing game
 5. Connection detection
 
-### Expect to add:
+## Expect to add:
 1. Main page contains room list
 2. Count online people 
 3. Use username to log-in, store the game 
@@ -23,6 +24,7 @@ Previous demo [Gobang-OnlineV2](https://github.com/ZhouYuxuan97/gobang-onlineV2)
 5. Set checkerboard size
 6. Beautify the interface
 
+## Final goal:
+Move the server to Java SpringBoot, use nginx and redis
 
-Final goal:
-Move the server to Java SpringBoot, use nginx and redis 
+Sample Pages
