@@ -1,7 +1,7 @@
 # Gobang-OnlineV3
 Simple Online Gobang Game, learning basic knowledge of node.js and websocket, using package of websocket.io.<br>
 Previous demo [Gobang-OnlineV2](https://github.com/ZhouYuxuan97/gobang-onlineV2)<br>
-Java Spring demo[Gobang-Online-Java-Spring](https://github.com/ZhouYuxuan97/Gobang-Online-Java-Spring)
+Java Spring demo [Gobang-Online-Java-Spring](https://github.com/ZhouYuxuan97/Gobang-Online-Java-Spring)
 
 ## Compare to V2 add:
 1. Room function
